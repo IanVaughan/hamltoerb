@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-require './hamltoerb'
+require './lib/hamltoerb'
 
 puts ARGV[0]
 HamlToErb.new(ARGV[0]).run
