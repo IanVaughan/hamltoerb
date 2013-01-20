@@ -1,0 +1,46 @@
+<noscript>
+  <div class="flash info">JavaScript is not available in your browser so we cannot determine if cookies are enabled. To login successfully cookies must be enabled.</div>
+</noscript>
+<section id="login">
+  <header class="title">
+    <h2>Already a member? Log in below:</h2>
+  </header>
+  <%= form_tag :session, :url => session_path, :class => 'stylish' do%>
+    <fieldset class="combined">
+      <div class="field">
+        <%= label_tag :member_id_or_email_address, 'Member ID or Email'%>
+        <div class="field-wrapper">
+          <%= email_field_tag :member_id_or_email_address, params[:member_id_or_email_address], "data-validate" => "memberid", :required => '', :placeholder => 'Member ID or Email', :tabindex => 1, :class => 'member-login'%>
+          <%= javascript_tag 'WLD.UI.createTextField($("#member_id_or_email_address"));'%>
+        </div>
+      </div>
+      <div class="field">
+        <%= label_tag :password%>
+        <div class="field-wrapper">
+          <%= password_field_tag :password, params[:password], :required => '', :placeholder => 'Password', :tabindex => 1%>
+          <%= javascript_tag 'WLD.UI.createTextField($("#password"));'%>
+        </div>
+      </div>
+    </fieldset>
+    <div class="buttons full">
+      <button tabindex="3" type="submit">Log in</button>
+    </div>
+  <% end %>
+</section>
+<section id="forgotten-password">
+  <header class="title">
+    <h2>Forgotten your username or password?</h2>
+  </header>
+  <div class="buttons full">
+    <%= link_to 'Request a reminder', new_forgotten_password_path, :class => 'button inset'%>
+  </div>
+</section>
+<section id="signup">
+  <header class="title">
+    <h2>Want to join for free?</h2>
+  </header>
+  <div class="buttons full">
+    <%= link_to 'Sign up now', signup_path, :class => 'button inset'%>
+  </div>
+</section>
+<%= javascript_tag 'WLD.UI.createForm($("form")[0]);'%>

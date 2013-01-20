@@ -1,0 +1,41 @@
+%noscript
+  %div.flash.info JavaScript is not available in your browser so we cannot determine if cookies are enabled. To login successfully cookies must be enabled.
+
+%section#login
+  %header.title
+    %h2 Already a member? Log in below:
+
+  = form_tag :session, :url => session_path, :class => 'stylish' do
+    %fieldset.combined
+      .field
+        = label_tag :member_id_or_email_address, 'Member ID or Email'
+        .field-wrapper
+          = email_field_tag :member_id_or_email_address, params[:member_id_or_email_address], "data-validate" => "memberid", :required => '', :placeholder => 'Member ID or Email', :tabindex => 1, :class => 'member-login'
+          %script WLD.UI.createTextField($("#member_id_or_email_address"));
+
+      .field
+        = label_tag :password
+        .field-wrapper
+          = password_field_tag :password, params[:password], :required => '', :placeholder => 'Password', :tabindex => 1
+          %script WLD.UI.createTextField($("#password"));
+
+    .buttons.full
+      %button{:tabindex => 3, :type => 'submit'} Log in
+    
+%section#forgotten-password
+  %header.title
+    %h2 Forgotten your username or password?
+  
+  .buttons.full
+    
+    
+    = link_to 'Request a reminder', new_forgotten_password_path, :class => 'button inset'
+%section#signup
+  %header.title
+    %h2 Want to join for free?
+  
+  .buttons.full
+    = link_to 'Sign up now', signup_path, :class => 'button inset'
+
+:javascript
+  WLD.UI.createForm($("form")[0])

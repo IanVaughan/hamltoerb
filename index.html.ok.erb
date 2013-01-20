@@ -1,0 +1,95 @@
+<section id="dashboard">
+  <ul>
+    <% if site.supports_postcodes? %>
+      <li class="local">
+        <%= link_to search_results_path, data: { 'tracking-category' => 'Dashboard', 'tracking-action' => 'Local Search' } do%>
+          <span class="icon"></span>
+          <span class="label">Local</span>
+        <% end %>
+      </li>
+    <% end %>
+    <li class="online">
+      <%= link_to search_results_path(:mode => :online), 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Online Search' do%>
+        <span class="icon"></span>
+        <span class="label">Online</span>
+      <% end %>
+    </li>
+    <li class="search">
+      <%= link_to search_results_path, data: { 'tracking-category' => 'Dashboard', 'tracking-action' => 'Search' } do%>
+        <span class="icon"></span>
+        <span class="label">Search</span>
+      <% end %>
+    </li>
+    <li class="messages">
+      <%= link_to current_member_conversations_path do%>
+        <span class="icon"></span>
+        <span class="label">Messages</span>
+        <% if @dashboard.messages > 0 -%>
+          <span class="count"><%= @dashboard.messages > 50 ? '50+' : @dashboard.messages%></span>
+        <% end %>
+      <% end %>
+    </li>
+    <li class="winks">
+      <%= link_to current_member_winks_path do%>
+        <span class="icon"></span>
+        <span class="label">Winks</span>
+        <% if @dashboard.winks > 0 -%>
+          <span class="count"><%= @dashboard.winks%></span>
+        <% end %>
+      <% end %>
+    </li>
+    <li class="viewed">
+      <%= link_to current_member_views_path do%>
+        <span class="icon"></span>
+        <span class="label">Views</span>
+      <% end %>
+    </li>
+    <li class="favourites">
+      <%= link_to current_member_favourites_path do%>
+        <span class="icon"></span>
+        <span class="label">Favourites</span>
+      <% end %>
+    </li>
+    <li class="profile">
+      <%= link_to current_member_path do%>
+        <span class="icon"></span>
+        <span class="label">Profile</span>
+      <% end %>
+    </li>
+    <li class="logout">
+      <%= link_to logout_path, data: { 'tracking-category' => 'Dashboard', 'tracking-action' => 'Logout' } do%>
+        <span class="icon"></span>
+        <span class="label">Log out</span>
+      <% end %>
+    </li>
+  </ul>
+  <% if current_member.basic? %>
+    <section class="grouped" id="upgrade">
+      <div class="box linked highlighted">
+        <%= link_to new_current_member_subscription_path do%>
+          <span>For full access to all features</span>
+          Upgrade your membership
+        <% end %>
+      </class>
+    </section>
+  <% end %>
+</section>
+<section id="help">
+  <ul>
+    <li class="switch">
+      <%= link_to desktop_path, data: { 'tracking-category' => 'Dashboard', 'data-tracking-action' => 'Switch to web' } do%>
+        Switch to web version
+      <% end %>
+    <% if site.niched? && !site.exclusive? -%>
+      <li class="settings"><%= link_to 'Settings', current_member_settings_path%></li>
+    <% end %>
+    <li class="help"><%= link_to 'Help', help_path%></li>
+  </ul>
+</section>
+<section id="footer">
+  <ul>
+    <li>&copy Copyright <%= Date.today.year%></li>
+    <li><%= link_to 'Terms', terms_path%></li>
+    <li><%= link_to 'Privacy', privacy_path%></li>
+  </ul>
+</section>

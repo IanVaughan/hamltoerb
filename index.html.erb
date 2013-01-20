@@ -1,0 +1,65 @@
+<section id="dashboard">
+  <ul>
+    <% if site.supports_postcodes? %>
+      <li class="local">
+        <%= link_to search_results_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Local Search'%>
+          <span class="icon">
+          <span class="label">Local
+    <li class="online">
+      <%= link_to search_results_path(:mode => :online), 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Online Search'%>
+        <span class="icon">
+        <span class="label">Online
+    <li class="search">
+      <%= link_to search_results_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Search'%>
+        <span class="icon">
+        <span class="label">Search
+    <li class="messages">
+      %a{:href => current_member_conversations_path}
+        <span class="icon">
+        <span class="label">Messages
+        <% if @dashboard.messages > 0 %>
+          <span class="count">#{@dashboard.messages > 50 ? '50+' : @dashboard.messages}
+    <li class="winks">
+      %a{:href => current_member_winks_path}
+        <span class="icon">
+        <span class="label">Winks
+        <% if @dashboard.winks > 0 %>
+          <span class="count">#{@dashboard.winks}
+    <li class="viewed">
+      %a{:href => current_member_views_path}
+        <span class="icon">
+        <span class="label">Views
+    <li class="favourites">
+      %a{:href => current_member_favourites_path}
+        <span class="icon">
+        <span class="label">Favourites
+    <li class="profile">
+      %a{:href => current_member_path}
+        <span class="icon">
+        <span class="label">Profile
+    <li class="logout">
+      <%= link_to logout_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Logout'%>
+        <span class="icon">
+        <span class="label">Log out
+
+<% if current_member.basic? %>
+  <section class="grouped"> id="upgrade"
+     class="box".linked.highlighted
+      %a{:href => new_current_member_subscription_path }
+        <span>For full access to all features
+        Upgrade your membership 
+    
+<section id="help">
+  <ul>
+    <li class="switch">
+      <%= link_to desktop_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Switch to web'%>
+        Switch to web version
+    <% if site.niched? && !site.exclusive? %>
+      <li class="settings">= link_to 'Settings', current_member_settings_path
+    <li class="help">= link_to 'Help', help_path
+        
+<section id="footer">
+  <ul>
+    <li>&copy; Copyright #{Date class="today".year}
+    <li>= link_to 'Terms', terms_path
+    <li>= link_to 'Privacy', privacy_path

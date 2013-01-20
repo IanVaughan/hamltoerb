@@ -1,0 +1,6 @@
+<header id="title">
+  %h2.icon.icon<%24.icon-envelope Email not verified! %>
+
+ class="box".outlined.info
+  <strong>We had a problem verifying your email, #{link_to "Resend verification", resend_verification_current_member_path}.
+  #{ @message }

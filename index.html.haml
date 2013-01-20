@@ -1,0 +1,65 @@
+%section#dashboard
+  %ul
+    - if site.supports_postcodes?
+      %li.local
+        %a{:href => search_results_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Local Search'}
+          %span.icon
+          %span.label Local
+    %li.online
+      %a{:href => search_results_path(:mode => :online), 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Online Search'}
+        %span.icon
+        %span.label Online
+    %li.search
+      %a{:href => search_results_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Search'}
+        %span.icon
+        %span.label Search
+    %li.messages
+      %a{:href => current_member_conversations_path}
+        %span.icon
+        %span.label Messages
+        - if @dashboard.messages > 0
+          %span.count #{@dashboard.messages > 50 ? '50+' : @dashboard.messages}
+    %li.winks
+      %a{:href => current_member_winks_path}
+        %span.icon
+        %span.label Winks
+        - if @dashboard.winks > 0
+          %span.count #{@dashboard.winks}
+    %li.viewed
+      %a{:href => current_member_views_path}
+        %span.icon
+        %span.label Views
+    %li.favourites
+      %a{:href => current_member_favourites_path}
+        %span.icon
+        %span.label Favourites
+    %li.profile
+      %a{:href => current_member_path}
+        %span.icon
+        %span.label Profile
+    %li.logout
+      %a{:href => logout_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Logout'}
+        %span.icon
+        %span.label Log out
+
+- if current_member.basic?
+  %section.grouped#upgrade
+    .box.linked.highlighted
+      %a{:href => new_current_member_subscription_path }
+        %span For full access to all features
+        Upgrade your membership 
+    
+%section#help
+  %ul
+    %li.switch
+      %a{:href => desktop_path, 'data-tracking-category' => 'Dashboard', 'data-tracking-action' => 'Switch to web'}
+        Switch to web version
+    - if site.niched? && !site.exclusive?
+      %li.settings= link_to 'Settings', current_member_settings_path
+    %li.help= link_to 'Help', help_path
+        
+%section#footer
+  %ul
+    %li &copy; Copyright #{Date.today.year}
+    %li= link_to 'Terms', terms_path
+    %li= link_to 'Privacy', privacy_path
